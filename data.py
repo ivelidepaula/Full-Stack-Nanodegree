@@ -3,13 +3,13 @@ import psycopg2
 # 1. What are the most popular three articles of all time?
 
 questionOne='What are the most popular three articles of all time?'
-queryOne=(
+queryOne=("""
     select articles.title, count(*) as views
     from articles inner join log on log.path
     like concat('%', articles.slug, '%')
     where log.status like '%200%' 
-    group by "articles.title, log.path 
-    order by views desc limit 3
+    group by articles.title, log.path 
+    order by views desc limit 3"""
 )
 
 # 2. Who are the most popular article authors of all time?
