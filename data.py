@@ -9,7 +9,7 @@ queryOne=(
     like concat('%', articles.slug, '%')
     where log.status like '%200%' 
     group by "articles.title, log.path 
-    order by views desc limit 3"
+    order by views desc limit 3
 )
 
 # 2. Who are the most popular article authors of all time?
