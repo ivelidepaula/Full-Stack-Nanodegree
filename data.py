@@ -2,7 +2,6 @@
 import psycopg2
 
 # 1. What are the most popular three articles of all time?
-
 questionOne='What are the most popular three articles of all time?'
 queryOne="""
     select 
@@ -20,7 +19,6 @@ queryOne="""
         views desc 
     limit 
         3"""
-
 
 # 2. Who are the most popular article authors of all time?
 questionTwo='Who are the most popular article authors of all time?'
@@ -58,8 +56,8 @@ def connect(database_name="news"):
     except:
         print ("Unable to connect to the database")
 
-# Return query result
-def get_query_result(query):
+# Return query results
+def get_query_results(query):
     db = psycopg2.connect(database=DB_NAME)
     c = db.cursor()
     c.execute(query)
@@ -67,3 +65,23 @@ def get_query_result(query):
     db.close()
 return results
 
+def print_query_results(query_results):
+    print (query_results[1])
+    for index, results in enumerate(query_results[0]):
+        print (
+            "\t", index+1, "-", results[0],
+            "\t - ", str(results[1]), "views")
+
+def print_error_results(query_results):
+    print (query_results[1])
+    for results in query_results[0]:
+        print ("\t", results[0], "-", str(results[1]) + "% errors")
+
+#Store and print the results
+if __name__ == '__main__':
+    popular_articles_results = get_query_results(queryOne), questionOne
+    popular_authors_results = get_query_results(queryTwo), questionTwo
+    load_error_days = get_query_results(queryThree), questionThree
+    print_query_results(popular_articles_results)
+    print_query_results(popular_authors_results)
+    print_error_results(load_error_days)
