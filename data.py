@@ -48,7 +48,6 @@ queryThree="""
 
 # Connect to postgreSQL database.
 def connect(database_name="news"):
-    """Connect to the PostgreSQL database. Returns a database connection """
     try:
         db = psycopg2.connect("dbname={}".format(database_name))
         cursor = db.cursor()
@@ -65,19 +64,21 @@ def get_query_results(query):
     db.close()
 return results
 
+#Display results for the first two questions
 def print_query_results(query_results):
     print (query_results[1])
     for index, results in enumerate(query_results[0]):
         print (
-            "\t", index+1, "-", results[0],
+            "\t", index+1, "--", results[0],
             "\t - ", str(results[1]), "views")
 
+#Display results for the last question
 def print_error_results(query_results):
     print (query_results[1])
     for results in query_results[0]:
         print ("\t", results[0], "--", str(results[1]) + "% errors")
 
-#Store and print the results
+#Store and print the final results
 if __name__ == '__main__':
     popular_articles_results = get_query_results(queryOne), questionOne
     popular_authors_results = get_query_results(queryTwo), questionTwo
