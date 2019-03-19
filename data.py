@@ -57,3 +57,13 @@ def connect(database_name="news"):
         return db, cursor
     except:
         print ("Unable to connect to the database")
+
+# Return query result
+def get_query_result(query):
+    db = psycopg2.connect(database=DB_NAME)
+    c = db.cursor()
+    c.execute(query)
+    results = c.fetchall()
+    db.close()
+return results
+
