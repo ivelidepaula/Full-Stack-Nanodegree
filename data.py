@@ -39,3 +39,11 @@ queryTwo="""
         views des"""
 
 # 3. On which days did more than 1% of requests lead to errors?
+questionThree='On which days did more than 1% of requests lead to errors?'
+queryThree="""
+    select 
+        * 
+    from 
+        error_log 
+    where 
+        Percent_Error > 1"""
