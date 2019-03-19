@@ -47,3 +47,13 @@ queryThree="""
         error_log 
     where 
         Percent_Error > 1"""
+
+# Connect to postgreSQL database.
+def connect(database_name="news"):
+    """Connect to the PostgreSQL database. Returns a database connection """
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        cursor = db.cursor()
+        return db, cursor
+    except:
+        print ("Unable to connect to the database")
