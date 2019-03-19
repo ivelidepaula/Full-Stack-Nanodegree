@@ -26,17 +26,16 @@ queryOne="""
 questionTwo='Who are the most popular article authors of all time?'
 queryTwo="""
     select 
-        authors.name, 
-        count(*) as views 
-    from 
-    articles 
-    inner join authors on articles.author = authors.id 
-    inner join log on concat('/article/', articles.slug) = log.path 
+        authors.name,
+        sum(article_view.views) as views 
+    from
+        article_view,
+        authors 
     where 
-        log.status like '%200%' 
+        authors.id = article_view.author
     group by 
         authors.name 
     order by 
-        views desc"""
+        views des"""
 
 # 3. On which days did more than 1% of requests lead to errors?
