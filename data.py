@@ -75,7 +75,7 @@ def print_query_results(query_results):
 def print_error_results(query_results):
     print (query_results[1])
     for results in query_results[0]:
-        print ("\t", results[0], "-", str(results[1]) + "% errors")
+        print ("\t", results[0], "--", str(results[1]) + "% errors")
 
 #Store and print the results
 if __name__ == '__main__':
